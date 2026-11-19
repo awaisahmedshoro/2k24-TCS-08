@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkyCast — Weather App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-icon">☀</span><span>SkyCast</span></div>
+      <div class="side-label">MENU</div>
+      <nav>
+        <button class="nav-item active" data-screen="home"><span>⌂</span> Overview</button>
+        <button class="nav-item" data-screen="hourly"><span>◷</span> Hourly forecast</button>
+        <button class="nav-item" data-screen="weekly"><span>▦</span> 7-day forecast</button>
+        <button class="nav-item" data-screen="search"><span>⌕</span> Search city</button>
+        <button class="nav-item" data-screen="settings"><span>⚙</span> Settings</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="mini-card"><div class="mini-sun">☀</div><b>Weather tip</b><p>Stay hydrated and enjoy your day!</p></div>
+        <div class="profile"><div class="avatar" id="profileAvatar">S</div><div><b id="profileName">SkyCast User</b><small>Weather explorer</small></div><button class="logout-btn" id="logoutBtn" title="Log out">↪</button></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><div class="eyebrow" id="todayLabel">YOUR WEATHER, AT A GLANCE</div><h1 id="screenTitle">Good morning!</h1></div>
+        <div class="top-actions"><div class="location-pill">📍 <span id="locationName">Karachi, Pakistan</span></div><button class="icon-btn" id="refreshBtn" title="Refresh weather">↻</button></div>
+      </header>
+
+      <section class="screen active" id="login"><div class="login-wrap"><div class="login-art"><div class="login-sun">☀</div><span class="login-cloud cloud-a"></span><span class="login-cloud cloud-b"></span><div class="login-art-copy"><span class="tag">YOUR WEATHER COMPANION</span><h2>Every day,<br>under the same sky.</h2><p>Stay one step ahead of the weather with SkyCast.</p></div></div><div class="login-form-area"><div class="brand login-brand"><span class="brand-icon">☀</span><span>SkyCast</span></div><span class="eyebrow">WELCOME BACK</span><h2>Sign in to SkyCast</h2><p class="login-intro">Enter your details to explore your weather dashboard.</p><form id="loginForm"><label for="userName">YOUR NAME</label><input id="userName" type="text" placeholder="e.g. Awais" autocomplete="name" required><label for="userEmail">EMAIL ADDRESS</label><input id="userEmail" type="email" placeholder="you@example.com" autocomplete="email" required><label for="userPassword">PASSWORD</label><input id="userPassword" type="password" placeholder="Enter your password" minlength="4" required><button class="login-submit" type="submit">Login to SkyCast <span>→</span></button><p class="login-message" id="loginMessage">Demo login: enter any name, email and password (4+ characters).</p></form><small class="login-foot">A simple weather experience, made for you.</small></div></div></section>
+      <section class="screen" id="home">
+        <div class="hero-card">
+          <div class="hero-copy"><span class="tag">CURRENT WEATHER</span><h2 id="heroCity">Karachi</h2><p id="heroDate">Today</p><div class="temperature"><span id="currentTemp">31</span><sup>°C</sup></div><h3 id="condition">Sunny</h3><p class="feels">Feels like <b id="feelsLike">34°C</b></p></div>
+          <div class="hero-art"><div class="sun-glow">☀</div><div class="cloud cloud-one"></div><div class="cloud cloud-two"></div></div>
+          <div class="hero-stats"><div><span>💧</span><small>Humidity</small><b id="humidity">62%</b></div><div><span>🌬</span><small>Wind speed</small><b id="wind">14 km/h</b></div><div><span>☀</span><small>UV index</small><b id="uv">5 Moderate</b></div><div><span>👁</span><small>Visibility</small><b id="visibility">10 km</b></div></div>
+        </div>
+        <div class="section-heading"><div><span class="eyebrow">PLAN YOUR DAY</span><h2>Today's highlights</h2></div><button class="text-btn" data-go="hourly">View hourly forecast →</button></div>
+        <div class="grid-two"><div class="panel"><div class="panel-head"><h3>Next 5 hours</h3><span class="muted">Temperature</span></div><div class="hour-strip" id="homeHours"></div></div><div class="panel"><div class="panel-head"><h3>Air conditions</h3><span class="good">Good</span></div><div class="air-grid"><div><small>Feels like</small><b id="airFeels">34°</b></div><div><small>Humidity</small><b id="airHumidity">62%</b></div><div><small>Wind</small><b id="airWind">14 km/h</b></div><div><small>Pressure</small><b>1012 hPa</b></div></div></div></div>
+      </section>
+
+      <section class="screen" id="hourly">
+        <div class="section-heading"><div><span class="eyebrow">HOUR BY HOUR</span><h2>Hourly forecast</h2><p class="muted">See how the weather changes throughout the day.</p></div></div>
+        <div class="panel"><div class="hourly-list" id="hourlyList"></div></div>
+      </section>
+
+      <section class="screen" id="weekly">
+        <div class="section-heading"><div><span class="eyebrow">THE WEEK AHEAD</span><h2>7-day forecast</h2><p class="muted">A quick look at the upcoming weather.</p></div></div>
+        <div class="panel"><div class="weekly-list" id="weeklyList"></div></div>
+      </section>
+
+      <section class="screen" id="search">
+        <div class="section-heading"><div><span class="eyebrow">EXPLORE THE WORLD</span><h2>Search a city</h2><p class="muted">Find live weather information for any city.</p></div></div>
+        <div class="search-panel panel"><label for="cityInput">CITY NAME</label><div class="search-row"><input id="cityInput" type="text" placeholder="e.g. Lahore, London, Dubai"><button id="searchBtn">Search weather</button></div><p class="helper" id="searchMessage">Try searching for a city to see its current weather.</p><div class="popular"><span>Popular searches</span><button data-city="Islamabad">Islamabad</button><button data-city="Lahore">Lahore</button><button data-city="Dubai">Dubai</button><button data-city="London">London</button></div></div>
+        <div class="search-result panel" id="searchResult"><div class="result-icon">🌤️</div><div><small>SELECTED LOCATION</small><h3 id="resultCity">Karachi, Pakistan</h3><p id="resultWeather">31°C · Sunny</p></div><button class="text-btn" data-go="home">Back to overview →</button></div>
+      </section>
+
+      <section class="screen" id="settings">
+        <div class="section-heading"><div><span class="eyebrow">MAKE IT YOURS</span><h2>Settings</h2><p class="muted">Customize your weather experience.</p></div></div>
+        <div class="panel settings-panel">
+          <div class="setting-row"><div><b>Temperature unit</b><p>Choose Celsius or Fahrenheit.</p></div><div class="segmented"><button class="unit active" data-unit="c">°C</button><button class="unit" data-unit="f">°F</button></div></div>
+          <div class="setting-row"><div><b>Appearance</b><p>Choose your preferred display theme.</p></div><div class="segmented"><button class="theme-choice active" data-theme="light">☀ Light</button><button class="theme-choice" data-theme="dark">☾ Dark</button></div></div>
+          <div class="setting-row"><div><b>Default location</b><p id="defaultLocation">Karachi, Pakistan</p></div><button class="outline-btn" data-go="search">Change city</button></div>
+          <div class="setting-row"><div><b>Weather data</b><p>Live forecast provided by Open-Meteo.</p></div><span class="good">Connected</span></div>
+        </div>
+        <div class="about panel"><div class="brand small-brand"><span class="brand-icon">☀</span> SkyCast</div><p>A simple, friendly weather dashboard designed to help you plan your day.</p><small>Student HCI Project · 2026</small></div>
+      </section>
+      <footer>SkyCast Weather App <span>•</span> Designed for clarity and comfort</footer>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
